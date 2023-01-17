@@ -38,22 +38,26 @@ public class Fraction {
    }
 
    public static void main (String args[]) {
-      try {
-         // create a new instance
-         // Fraction *frac = [[Fraction alloc] init];
-         Fraction frac = new Fraction();
+      if (args.length == 2) {
+         try {
+            int argX = Integer.parseInt(args[0]);
+            int argY = Integer.parseInt(args[1]);
 
-         // set the values
-         frac.setNumerator(1);
-         frac.setDenominator(3);
+            Fraction frac = new Fraction();
 
-         // print it
-         System.out.print("The fraction is: ");
-         frac.print();
-         System.out.println("");
+            // set the values
+            frac.setNumerator(argX);
+            frac.setDenominator(argY);
 
-      }catch(Exception e) {
-         e.printStackTrace();
+            System.out.print("The fraction is: ");
+            frac.print();
+            System.out.println("");
+         } catch (Exception ex) {
+            System.out.println("Arguments: " + args[0] + ", " + args[1] + " must be integers.");
+            System.exit(1);
+         }
+      } else {
+         System.out.println("Exactly 2 arguments should be provided.\n gradle run --args='1 2'");
       }
    }
 }

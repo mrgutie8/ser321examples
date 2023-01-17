@@ -38,6 +38,10 @@ task runAppAgain(type: JavaExec) {
     args(project.getProperty('num1'), project.getProperty('num2'));
   } else if (project.hasProperty("num1")){
     args(project.getProperty('num1'), 1);
+  } else if (project.hasProperty("num2")){
+    args(1, project.getProperty('num2'));
+  } else {
+    args(2, 1);
   }
 }
 
@@ -55,6 +59,24 @@ task runFraction(type: JavaExec) {
 // 1. Change Fraction.main so it accepts 2 arguments
 // 2. Create a new gradle tasks that accepts two arguments and 
 //    can be called as: gradle runFrac -Pdenom=4 -Pnum=3 or as gradle runFrac -Pnum=3 -Pdenom=4 , also make sure it can run with only 1 or no arguments
+task  runFrac(type: JavaExec) {
+  group 'Fraction tasks'
+  description 'Tasks which runs Fraction with default parameters or given values'
+
+  classpath = sourceSets.main.runtimeClasspath
+
+  main = 'Fraction'
+
+  if (project.hasProperty("Pdenom") && project.hasProperty("Pnum")) {
+    args(project.getProperty('Pdenom'), project.getProperty('Pnum'));
+  } else if (project.hasProperty("Pdenom")){
+    args(project.getProperty('Pdenom'), 1);
+  } else if (project.hasProperty("Pnum")){
+    args(1, project.getProperty('Pnum'));
+  } else {
+    args(2, 1);
+  }
+}
 
 // Example how you can add that libraries can be pulled from mavenCentral()
 // repositories {
